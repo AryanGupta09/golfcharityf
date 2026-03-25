@@ -179,7 +179,7 @@ export default function CharitiesPage() {
           </div>
           {donating && (
             <p className="text-xs text-center text-amber-600 dark:text-amber-400">
-              Processing... please wait (may take up to 30 seconds)
+              Processing your donation...
             </p>
           )}
           <div className="flex gap-3">

@@ -271,9 +271,9 @@ export default function SettingsPage() {
               </div>
 
               <Button onClick={handleSubscribe} loading={subscribing} variant="coral" className="w-full">
-                {subscribing ? 'Processing... (may take 30s)' : `Subscribe — ${selectedPlan === 'monthly' ? '$9.99/mo' : '$99.99/yr'}`}
+                {subscribing ? 'Processing...' : `Subscribe — ${selectedPlan === 'monthly' ? '$9.99/mo' : '$99.99/yr'}`}
               </Button>
-              <p className="text-xs text-center text-gray-400">Demo mode — no real payment required. First request may take 30 seconds.</p>
+              <p className="text-xs text-center text-gray-400">Demo mode — no real payment required</p>
             </div>
           )}
         </Card>
