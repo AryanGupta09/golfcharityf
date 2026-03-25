@@ -4,6 +4,7 @@ import { motion, useInView } from 'framer-motion'
 import { ArrowRight, Heart, Trophy, Users, Sparkles, ExternalLink } from 'lucide-react'
 import Button from '../components/Button'
 import { charityService } from '../services/charityService'
+import { useAuthStore } from '../store/authStore'
 
 // ── Animated donation counter ────────────────────────────────
 function DonationCounter() {
@@ -66,6 +67,7 @@ const stagger = { hidden: {}, show: { transition: { staggerChildren: 0.15 } } }
 
 export default function HomePage() {
   const [featured, setFeatured] = useState(null)
+  const { isAuthenticated } = useAuthStore()
 
   useEffect(() => {
     charityService.getFeaturedCharity()
@@ -110,7 +112,7 @@ export default function HomePage() {
           {/* CTAs */}
           <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.3 }}
             className="flex flex-col sm:flex-row gap-3 justify-center">
-            <Link to="/signup">
+            <Link to={isAuthenticated ? '/dashboard' : '/signup'}>
               <Button variant="coral" size="lg" className="w-full sm:w-auto gap-2">
                 Start Making Impact <ArrowRight size={18} />
               </Button>
