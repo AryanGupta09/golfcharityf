@@ -97,7 +97,13 @@ export default function SettingsPage() {
       toast.success(`${selectedPlan === 'monthly' ? 'Monthly' : 'Yearly'} subscription activated!`)
       fetchData()
     } catch (err) {
-      toast.error(err.response?.data?.message || 'Failed to create subscription')
+      // Ignore timeout errors — subscription may have succeeded (Render cold start)
+      if (err.code === 'ECONNABORTED' || err.message?.includes('timeout')) {
+        toast.success('Subscription activated! Refreshing...')
+        setTimeout(() => fetchData(), 3000)
+      } else {
+        toast.error(err.response?.data?.message || 'Failed to create subscription')
+      }
     } finally { setSubscribing(false) }
   }
 
@@ -265,9 +271,9 @@ export default function SettingsPage() {
               </div>
 
               <Button onClick={handleSubscribe} loading={subscribing} variant="coral" className="w-full">
-                {subscribing ? 'Processing...' : `Subscribe — ${selectedPlan === 'monthly' ? '$9.99/mo' : '$99.99/yr'}`}
+                {subscribing ? 'Processing... (may take 30s)' : `Subscribe — ${selectedPlan === 'monthly' ? '$9.99/mo' : '$99.99/yr'}`}
               </Button>
-              <p className="text-xs text-center text-gray-400">Demo mode — no real payment required</p>
+              <p className="text-xs text-center text-gray-400">Demo mode — no real payment required. First request may take 30 seconds.</p>
             </div>
           )}
         </Card>

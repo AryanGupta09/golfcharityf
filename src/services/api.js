@@ -4,7 +4,7 @@ import { useAuthStore } from '../store/authStore'
 // Create axios instance
 const api = axios.create({
   baseURL: import.meta.env.VITE_API_URL || 'http://localhost:5000/api',
-  timeout: 10000,
+  timeout: 60000, // 60 sec — Render free tier cold start
 })
 
 // Add token to requests
