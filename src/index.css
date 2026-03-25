@@ -1,0 +1,61 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * { transition-property: color, background-color, border-color; transition-duration: 200ms; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Inter', system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+  ::-webkit-scrollbar { width: 6px; height: 6px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: #d1d5db; border-radius: 9999px; }
+  .dark ::-webkit-scrollbar-thumb { background: #374151; }
+}
+
+@layer components {
+  .card {
+    background: white;
+    border-radius: 1rem;
+    border: 1px solid #f3f4f6;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+    padding: 1.5rem;
+  }
+  .dark .card {
+    background: #1f2937;
+    border-color: #374151;
+  }
+
+  .card-glass {
+    @apply backdrop-blur-xl bg-white/10 border border-white/20 rounded-2xl p-6;
+  }
+
+  .input-field {
+    @apply w-full px-4 py-3 rounded-xl text-sm
+           bg-gray-50 dark:bg-dark-700
+           border border-gray-200 dark:border-dark-600
+           text-gray-900 dark:text-white
+           placeholder-gray-400 dark:placeholder-gray-500
+           focus:outline-none focus:ring-2 focus:ring-navy-500 focus:border-transparent
+           transition-all duration-200;
+    min-height: 44px;
+  }
+
+  .focus-ring {
+    @apply focus:outline-none focus:ring-2 focus:ring-navy-500 focus:ring-offset-2 dark:focus:ring-offset-dark-800;
+  }
+
+  .glass { @apply backdrop-blur-xl bg-white/10 border border-white/20; }
+  .glass-dark { @apply backdrop-blur-xl bg-dark-900/60 border border-dark-700/50; }
+}
+
+@keyframes shimmer {
+  0%   { background-position: -1000px 0; }
+  100% { background-position:  1000px 0; }
+}
+.animate-shimmer {
+  animation: shimmer 2s infinite;
+  background: linear-gradient(to right, transparent, rgba(255,255,255,0.08), transparent);
+  background-size: 1000px 100%;
+}
